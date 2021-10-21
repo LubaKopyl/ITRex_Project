@@ -8,20 +8,16 @@ public class FlywayService {
     private Flyway flyway;
 
     public FlywayService() {
-        inti();
+        init();
     }
 
     public void migrate() {
         flyway.migrate();
     }
 
-    public void clean() {
-        flyway.clean();
-    }
-
-    private void inti() {
+    private void init() {
         flyway = Flyway.configure()
-                .dataSource(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD)
+                .dataSource(H2_URL, H2_USER, H2_PASSWORD)
                 .locations(MIGRATIONS_LOCATION)
                 .load();
     }
