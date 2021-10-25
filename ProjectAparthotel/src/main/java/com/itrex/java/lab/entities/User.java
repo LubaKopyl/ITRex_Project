@@ -1,11 +1,31 @@
 package com.itrex.java.lab.entities;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "users", schema = "public")
+
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer userId;
-    private String firstName;
-    private String lastName;
+
     private String email;
     private String password;
+
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
     public Integer getUserId() {
         return userId;

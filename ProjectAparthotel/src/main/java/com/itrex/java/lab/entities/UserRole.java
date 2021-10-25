@@ -1,7 +1,21 @@
 package com.itrex.java.lab.entities;
 
-public class UserRole {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "users_roles", schema = "public")
+
+public class UserRole implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer userId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private Integer roleId;
 
     public Integer getUserId() {

@@ -3,10 +3,14 @@ package com.itrex.java.lab;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.repositories.RoleRepository;
 import com.itrex.java.lab.repositories.UserRepository;
-import com.itrex.java.lab.repositories.impl.JDBCRoleRepositoryImpl;
-import com.itrex.java.lab.repositories.impl.JDBCUserRepositoryImpl;
+import com.itrex.java.lab.repositories.impl.hibernate.HibernateRoleRepositoryImpl;
+import com.itrex.java.lab.repositories.impl.hibernate.HibernateUserRepositoryImpl;
+import com.itrex.java.lab.repositories.impl.jdbc.JDBCRoleRepositoryImpl;
+import com.itrex.java.lab.repositories.impl.jdbc.JDBCUserRepositoryImpl;
 import com.itrex.java.lab.service.FlywayService;
+import com.itrex.java.lab.util.HibernateUtil;
 import org.h2.jdbcx.JdbcConnectionPool;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +26,20 @@ public class Runner {
         flywayService.migrate();
 
         System.out.println("============CREATE CONNECTION POOL================");
-        JdbcConnectionPool jdbcConnectionPool = JdbcConnectionPool.create(H2_URL, H2_USER, H2_PASSWORD);
+        //JdbcConnectionPool jdbcConnectionPool = JdbcConnectionPool.create(H2_URL, H2_USER, H2_PASSWORD);
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
         System.out.println("=============CREATE UserRepository and RoleRepository================");
-        UserRepository userRepository = new JDBCUserRepositoryImpl(jdbcConnectionPool);
-        RoleRepository roleRepository = new JDBCRoleRepositoryImpl(jdbcConnectionPool);
+
+        //UserRepository userRepository = new JDBCUserRepositoryImpl(jdbcConnectionPool);
+        //RoleRepository roleRepository = new JDBCRoleRepositoryImpl(jdbcConnectionPool);
+
+        UserRepository userRepository = new HibernateUserRepositoryImpl(session);
+        RoleRepository roleRepository = new HibernateRoleRepositoryImpl(session);
 
         System.out.println("All existing users: " + userRepository.selectAll());
         System.out.println("All existing roles: " + roleRepository.selectAll());
+        System.out.println("All existing users with roles: " + userRepository.getUsersInfo());
 
         System.out.println("All users with the GUEST role: " + userRepository.selectAllUsersByRole("guest"));
         System.out.println("All users with the ADMIN role: " + userRepository.selectAllUsersByRole("admin"));
@@ -74,7 +84,7 @@ public class Runner {
         System.out.println("All users after deleting: " + userRepository.selectAll());
 
         System.out.println("=========CLOSE ALL UNUSED CONNECTIONS=============");
-        jdbcConnectionPool.dispose();
+        //jdbcConnectionPool.dispose();
         System.out.println("=================SHUT DOWN APP====================");
     }
 }
