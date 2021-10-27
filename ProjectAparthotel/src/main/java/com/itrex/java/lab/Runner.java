@@ -14,7 +14,9 @@ import org.hibernate.Session;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.itrex.java.lab.properties.Properties.*;
+import static com.itrex.java.lab.properties.Properties.H2_URL;
+import static com.itrex.java.lab.properties.Properties.H2_USER;
+import static com.itrex.java.lab.properties.Properties.H2_PASSWORD;
 
 public class Runner {
 

@@ -14,13 +14,13 @@ public class User {
     @Column(name = "user_id")
     private Integer userId;
 
-    private String email;
-    private String password;
-
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+
+    private String email;
+    private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "users_roles",

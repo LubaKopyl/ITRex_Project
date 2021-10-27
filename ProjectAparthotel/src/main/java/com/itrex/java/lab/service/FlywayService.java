@@ -15,6 +15,10 @@ public class FlywayService {
         flyway.migrate();
     }
 
+    public void clean() {
+        flyway.clean();
+    }
+
     private void init() {
         flyway = Flyway.configure()
                 .dataSource(H2_URL, H2_USER, H2_PASSWORD)
