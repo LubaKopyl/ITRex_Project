@@ -17,6 +17,9 @@
         <mapping class="com.itrex.java.lab.entities.User"/>
         <mapping class="com.itrex.java.lab.entities.Role"/>
         <mapping class="com.itrex.java.lab.entities.UserRole"/>
+        <mapping class="com.itrex.java.lab.entities.Booking"/>
+        <mapping class="com.itrex.java.lab.entities.Room"/>
+        <mapping class="com.itrex.java.lab.entities.Price"/>
 
     </session-factory>
 </hibernate-configuration>

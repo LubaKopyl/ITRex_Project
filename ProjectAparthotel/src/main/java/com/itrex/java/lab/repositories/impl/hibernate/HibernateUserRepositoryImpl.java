@@ -29,13 +29,7 @@ public class HibernateUserRepositoryImpl implements UserRepository {
 
     @Override
     public List<UserInfo> getUsersInfo() {
-        List<UserInfo> userInfos = new ArrayList<>();
-        try {
-            userInfos = session.createQuery(SELECT_ALL_USERS_WITH_ROLES_QUERY, UserInfo.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userInfos;
+        return null;
     }
 
     @Override

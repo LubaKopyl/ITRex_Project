@@ -1,10 +1,9 @@
 package com.itrex.java.lab;
 
+import com.itrex.java.lab.entities.Price;
 import com.itrex.java.lab.entities.User;
-import com.itrex.java.lab.repositories.RoleRepository;
-import com.itrex.java.lab.repositories.UserRepository;
-import com.itrex.java.lab.repositories.impl.hibernate.HibernateRoleRepositoryImpl;
-import com.itrex.java.lab.repositories.impl.hibernate.HibernateUserRepositoryImpl;
+import com.itrex.java.lab.repositories.*;
+import com.itrex.java.lab.repositories.impl.hibernate.*;
 import com.itrex.java.lab.repositories.impl.jdbc.JDBCRoleRepositoryImpl;
 import com.itrex.java.lab.repositories.impl.jdbc.JDBCUserRepositoryImpl;
 import com.itrex.java.lab.service.FlywayService;
@@ -36,10 +35,12 @@ public class Runner {
 
         UserRepository userRepository = new HibernateUserRepositoryImpl(session);
         RoleRepository roleRepository = new HibernateRoleRepositoryImpl(session);
+        RoomRepository roomRepository = new HibernateRoomRepositoryImpl(session);
+        BookingRepository bookingRepository = new HibernateBookingRepositoryImpl(session);
+        PriceRepository priceRepository = new HibernatePriceRepositoryImpl(session);
 
         System.out.println("All existing users: " + userRepository.selectAll());
         System.out.println("All existing roles: " + roleRepository.selectAll());
-        System.out.println("All existing users with roles: " + userRepository.getUsersInfo());
 
         System.out.println("All users with the GUEST role: " + userRepository.selectAllUsersByRole("guest"));
         System.out.println("All users with the ADMIN role: " + userRepository.selectAllUsersByRole("admin"));
@@ -82,6 +83,12 @@ public class Runner {
         System.out.println("User with id = 5 was deleted.");
 
         System.out.println("All users after deleting: " + userRepository.selectAll());
+
+        System.out.println("All rooms: " + roomRepository.selectAll());
+
+        System.out.println("All bookings: " + bookingRepository.selectAll());
+
+        System.out.println("All prices: " + priceRepository.selectAll());
 
         System.out.println("=========CLOSE ALL UNUSED CONNECTIONS=============");
         //jdbcConnectionPool.dispose();
