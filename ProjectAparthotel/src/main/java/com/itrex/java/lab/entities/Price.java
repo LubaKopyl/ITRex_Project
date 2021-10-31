@@ -19,7 +19,7 @@ public class Price {
     private Timestamp periodEnd;
     private BigDecimal price;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
     private Room room;
 

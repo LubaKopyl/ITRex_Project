@@ -26,10 +26,10 @@ public class Room {
     @Column(name = "has_air_conditioning")
     private Boolean hasAirConditioning;
 
-    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "room")
     private Booking booking;
 
-    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "room")
     private Price price;
 
     public Integer getRoomId() {

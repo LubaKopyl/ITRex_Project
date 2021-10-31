@@ -20,7 +20,7 @@ public class Booking {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
     private Room room;
 
