@@ -6,7 +6,7 @@ import java.util.List;
 public interface BookingRepository {
     List<Booking> selectAll();
 
-    void add(Booking booking);
+    Booking add(Booking booking);
 
     void addAll(List<Booking> bookings);
 

@@ -6,7 +6,7 @@ import java.util.List;
 public interface RoleRepository {
     List<Role> selectAll();
 
-    void add(Role role);
+    Role add(Role role);
 
     void addAll(List<Role> roles);
 

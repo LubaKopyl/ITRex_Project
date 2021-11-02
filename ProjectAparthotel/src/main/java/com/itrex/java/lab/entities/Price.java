@@ -19,9 +19,21 @@ public class Price {
     private Timestamp periodEnd;
     private BigDecimal price;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
+
+    public Price() {
+
+    }
+
+    public Price(Integer priceId, Timestamp periodStart, Timestamp periodEnd, BigDecimal price, Room room) {
+        this.priceId = priceId;
+        this.periodStart = periodStart;
+        this.periodEnd = periodEnd;
+        this.price = price;
+        this.room = room;
+    }
 
     public Integer getPriceId() {
         return priceId;

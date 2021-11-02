@@ -20,8 +20,18 @@ public class HibernatePriceRepositoryImpl implements PriceRepository {
     }
 
     @Override
-    public void add(Price price) {
-        session.save(price);
+    public Price add(Price price) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(price);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RepositoryException("Can't add a price." , ex);
+        }
+        return price;
     }
 
     @Override

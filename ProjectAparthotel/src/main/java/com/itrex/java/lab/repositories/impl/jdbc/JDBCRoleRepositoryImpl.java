@@ -34,12 +34,13 @@ public class JDBCRoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public void add(Role role) {
+    public Role add(Role role) {
         try (Connection con = dataSource.getConnection()) {
             insertRole(role, con);
         } catch (SQLException ex) {
             throw new RepositoryException("Can't add a role." , ex);
         }
+        return role;
     }
 
     @Override

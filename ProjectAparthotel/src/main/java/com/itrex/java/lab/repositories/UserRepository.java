@@ -11,7 +11,7 @@ public interface UserRepository {
 
     List<User> selectAllUsersByRole(String roleName);
 
-    void add(User user);
+    User add(User user);
 
     void addAll(List<User> users);
 

@@ -6,7 +6,7 @@ import java.util.List;
 public interface PriceRepository {
     List<Price> selectAll();
 
-    void add(Price price);
+    Price add(Price price);
 
     void addAll(List<Price> prices);
 

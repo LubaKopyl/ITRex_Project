@@ -6,7 +6,7 @@ import java.util.List;
 public interface RoomRepository {
     List<Room> selectAll();
 
-    void add(Room room);
+    Room add(Room room);
 
     void addAll(List<Room> rooms);
 

@@ -6,7 +6,6 @@ import com.itrex.java.lab.repositories.BookingRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateBookingRepositoryImpl implements BookingRepository {
@@ -22,8 +21,18 @@ public class HibernateBookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public void add(Booking booking) {
-        session.save(booking);
+    public Booking add(Booking booking) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(booking);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RepositoryException("Can't add a booking." , ex);
+        }
+        return booking;
     }
 
     @Override

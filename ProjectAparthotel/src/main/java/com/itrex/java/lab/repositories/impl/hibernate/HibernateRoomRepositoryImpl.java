@@ -20,8 +20,18 @@ public class HibernateRoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public void add(Room room) {
-        session.save(room);
+    public Room add(Room room) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(room);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RepositoryException("Can't add a room." , ex);
+        }
+        return room;
     }
 
     @Override

@@ -26,11 +26,27 @@ public class Room {
     @Column(name = "has_air_conditioning")
     private Boolean hasAirConditioning;
 
-    @OneToOne(mappedBy = "room")
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
     private Booking booking;
 
-    @OneToOne(mappedBy = "room")
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
     private Price price;
+
+    public Room() {
+
+    }
+
+    public Room(Integer roomId, Integer numberOfGuests, Integer numberOfBeds, Boolean hasKitchen,
+                Boolean hasTV, Boolean hasWasher, Boolean hasHairDryer, Boolean hasAirConditioning) {
+        this.roomId = roomId;
+        this.numberOfGuests = numberOfGuests;
+        this.numberOfBeds = numberOfBeds;
+        this.hasKitchen = hasKitchen;
+        this.hasTV = hasTV;
+        this.hasWasher = hasWasher;
+        this.hasHairDryer = hasHairDryer;
+        this.hasAirConditioning = hasAirConditioning;
+    }
 
     public Integer getRoomId() {
         return roomId;

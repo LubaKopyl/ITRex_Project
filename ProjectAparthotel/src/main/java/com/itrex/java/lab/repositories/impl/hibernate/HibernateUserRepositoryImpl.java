@@ -45,8 +45,18 @@ public class HibernateUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void add(User user) {
-        session.save(user);
+    public User add(User user) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(user);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RepositoryException("Can't add a user." , ex);
+        }
+        return user;
     }
 
     @Override

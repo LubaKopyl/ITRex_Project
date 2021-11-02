@@ -1,8 +1,8 @@
 package com.itrex.java.lab.repositories.impl.hibernate;
 
 import com.itrex.java.lab.entities.Role;
+import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.RoleRepository;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,8 +21,18 @@ public class HibernateRoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public void add(Role role) {
-        session.save(role);
+    public Role add(Role role) {
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(role);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RepositoryException("Can't add a role." , ex);
+        }
+        return role;
     }
 
     @Override
@@ -38,10 +48,11 @@ public class HibernateRoleRepositoryImpl implements RoleRepository {
         try {
             session.delete(session.load(Role.class, roleId));
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new RepositoryException("Can't delete a role." , ex);
         }
     }
 

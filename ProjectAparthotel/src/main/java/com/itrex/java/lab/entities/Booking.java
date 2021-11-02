@@ -20,13 +20,26 @@ public class Booking {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Booking() {
+
+    }
+
+    public Booking(Integer bookingId, Timestamp arrivalDate, Timestamp departureDate, BigDecimal totalPrice, Room room, User user) {
+        this.bookingId = bookingId;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
+        this.totalPrice = totalPrice;
+        this.room = room;
+        this.user = user;
+    }
 
     public Integer getBookingId() {
         return bookingId;
