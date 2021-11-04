@@ -15,8 +15,6 @@ public class QueryConstants {
             "INNER JOIN roles ON users_roles.role_id = roles.role_id WHERE role_name = ?";
     public static final String INSERT_USER_QUERY = "INSERT INTO users(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     public static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";
-    /*public static final String DELETE_USER_QUERY = "DELETE FROM users u INNER JOIN users_roles ur ON u.user_id = ur.user_id " +
-            "INNER JOIN roles r ON ur.role_id = r.role_id WHERE user_id = ?";*/
     public static final String UPDATE_USER_QUERY = "UPDATE users SET first_name=?, last_name=?, email=?, password=? WHERE user_id = ?";
     public static final String SELECT_USER_BY_ID_QUERY = "SELECT * FROM users WHERE user_id = ?";
 

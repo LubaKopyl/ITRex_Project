@@ -6,10 +6,12 @@ import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class HibernateUserRepositoryImpl implements UserRepository {
     private final Session session;
 

@@ -2,8 +2,9 @@ package com.itrex.java.lab.repositories.impl.jdbc;
 
 import com.itrex.java.lab.entities.Role;
 import com.itrex.java.lab.exceptions.RepositoryException;
-import com.itrex.java.lab.repositories.RoleRepository;
 import com.itrex.java.lab.repositories.QueryConstants;
+import com.itrex.java.lab.repositories.RoleRepository;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;

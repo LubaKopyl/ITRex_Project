@@ -5,9 +5,11 @@ import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.PriceRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class HibernatePriceRepositoryImpl implements PriceRepository {
     private final Session session;
     public HibernatePriceRepositoryImpl(Session session) {

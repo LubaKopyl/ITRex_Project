@@ -5,9 +5,11 @@ import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.RoomRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class HibernateRoomRepositoryImpl implements RoomRepository {
     private final Session session;
     public HibernateRoomRepositoryImpl(Session session) {

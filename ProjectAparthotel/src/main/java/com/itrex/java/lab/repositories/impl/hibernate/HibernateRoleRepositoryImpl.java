@@ -5,9 +5,11 @@ import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.RoleRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class HibernateRoleRepositoryImpl implements RoleRepository {
 
     private final Session session;

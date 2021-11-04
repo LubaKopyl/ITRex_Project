@@ -5,9 +5,11 @@ import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.BookingRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class HibernateBookingRepositoryImpl implements BookingRepository {
     private final Session session;
 

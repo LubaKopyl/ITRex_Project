@@ -1,11 +1,14 @@
 package com.itrex.java.lab.repository.impl;
 
+import com.itrex.java.lab.config.ApplicationContextConfiguration;
 import com.itrex.java.lab.entities.Room;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.RoomRepository;
-import com.itrex.java.lab.repositories.impl.hibernate.HibernateRoomRepositoryImpl;
 import com.itrex.java.lab.repository.BaseRepositoryTest;
+import com.itrex.java.lab.service.FlywayService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +17,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HibernateRoomRepositoryImplTest extends BaseRepositoryTest {
 
+    private final ApplicationContext applicationContext;
+    private final FlywayService flywayService;
     private final RoomRepository roomRepository;
 
     public HibernateRoomRepositoryImplTest() {
         super();
-        roomRepository = new HibernateRoomRepositoryImpl(getSessionFactory().openSession());
+        applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
+        flywayService = applicationContext.getBean(FlywayService.class);
+        roomRepository = applicationContext.getBean(RoomRepository.class);
     }
 
     @Test

@@ -3,16 +3,13 @@ package com.itrex.java.lab.repositories.impl.jdbc;
 import com.itrex.java.lab.dto.UserInfo;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
-import com.itrex.java.lab.repositories.UserRepository;
 import com.itrex.java.lab.repositories.QueryConstants;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.itrex.java.lab.repositories.UserRepository;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
 
 public class JDBCUserRepositoryImpl implements UserRepository {
 

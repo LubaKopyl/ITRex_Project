@@ -1,12 +1,15 @@
 package com.itrex.java.lab.repository.impl;
 
+import com.itrex.java.lab.config.ApplicationContextConfiguration;
 import com.itrex.java.lab.entities.Price;
 import com.itrex.java.lab.entities.Room;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.PriceRepository;
-import com.itrex.java.lab.repositories.impl.hibernate.HibernatePriceRepositoryImpl;
 import com.itrex.java.lab.repository.BaseRepositoryTest;
+import com.itrex.java.lab.service.FlywayService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -17,11 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HibernatePriceRepositoryImplTest extends BaseRepositoryTest {
 
+    private final ApplicationContext applicationContext;
+    private final FlywayService flywayService;
     private final PriceRepository priceRepository;
 
     public HibernatePriceRepositoryImplTest() {
         super();
-        priceRepository = new HibernatePriceRepositoryImpl(getSessionFactory().openSession());
+        applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
+        flywayService = applicationContext.getBean(FlywayService.class);
+        priceRepository = applicationContext.getBean(PriceRepository.class);
     }
 
     @Test

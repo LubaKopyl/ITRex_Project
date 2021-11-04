@@ -1,26 +1,19 @@
 package com.itrex.java.lab.repository;
 
-import static com.itrex.java.lab.properties.Properties.H2_URL;
-import static com.itrex.java.lab.properties.Properties.H2_USER;
-import static com.itrex.java.lab.properties.Properties.H2_PASSWORD;
-
 import com.itrex.java.lab.service.FlywayService;
-import com.itrex.java.lab.util.HibernateUtil;
-import org.h2.jdbcx.JdbcConnectionPool;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class BaseRepositoryTest {
+public abstract class BaseRepositoryTest {
 
     private final FlywayService flywayService;
-    private final JdbcConnectionPool connectionPool;
-    private final SessionFactory sessionFactory;
+    private final ApplicationContext applicationContext;
 
     public BaseRepositoryTest () {
+        applicationContext = new AnnotationConfigApplicationContext();
         flywayService = new FlywayService();
-        connectionPool = JdbcConnectionPool.create(H2_URL, H2_USER, H2_PASSWORD);
-        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     @BeforeEach
@@ -32,11 +25,4 @@ public class BaseRepositoryTest {
     public void cleanDB() {
         flywayService.clean();
     }
-
-    public JdbcConnectionPool getConnectionPool() {
-        return connectionPool;
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory; }
 }

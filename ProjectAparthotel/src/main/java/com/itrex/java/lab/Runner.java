@@ -1,46 +1,38 @@
 package com.itrex.java.lab;
 
-import com.itrex.java.lab.entities.Price;
+import com.itrex.java.lab.config.ApplicationContextConfiguration;
 import com.itrex.java.lab.entities.User;
+import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.*;
-import com.itrex.java.lab.repositories.impl.hibernate.*;
-import com.itrex.java.lab.repositories.impl.jdbc.JDBCRoleRepositoryImpl;
-import com.itrex.java.lab.repositories.impl.jdbc.JDBCUserRepositoryImpl;
 import com.itrex.java.lab.service.FlywayService;
-import com.itrex.java.lab.util.HibernateUtil;
-import org.h2.jdbcx.JdbcConnectionPool;
-import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.itrex.java.lab.properties.Properties.H2_URL;
-import static com.itrex.java.lab.properties.Properties.H2_USER;
-import static com.itrex.java.lab.properties.Properties.H2_PASSWORD;
-
 public class Runner {
 
     public static void main(String[] args) {
+
         System.out.println("===================START APP======================");
         System.out.println("================START MIGRATION===================");
-        FlywayService flywayService = new FlywayService();
-        flywayService.migrate();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
+        applicationContext.getBean(FlywayService.class);
 
-        System.out.println("============CREATE CONNECTION POOL================");
-        //JdbcConnectionPool jdbcConnectionPool = JdbcConnectionPool.create(H2_URL, H2_USER, H2_PASSWORD);
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        UserRepository userRepository = applicationContext.getBean(UserRepository.class);
+        RoleRepository roleRepository = applicationContext.getBean(RoleRepository.class);
+        RoomRepository roomRepository = applicationContext.getBean(RoomRepository.class);
+        BookingRepository bookingRepository = applicationContext.getBean(BookingRepository.class);
+        PriceRepository priceRepository = applicationContext.getBean(PriceRepository.class);
 
-        System.out.println("=============CREATE UserRepository and RoleRepository================");
+        workWithHibernate(userRepository, roleRepository, roomRepository, bookingRepository, priceRepository);
 
-        //UserRepository userRepository = new JDBCUserRepositoryImpl(jdbcConnectionPool);
-        //RoleRepository roleRepository = new JDBCRoleRepositoryImpl(jdbcConnectionPool);
+        System.out.println("=================SHUT DOWN APP====================");
+    }
 
-        UserRepository userRepository = new HibernateUserRepositoryImpl(session);
-        RoleRepository roleRepository = new HibernateRoleRepositoryImpl(session);
-        RoomRepository roomRepository = new HibernateRoomRepositoryImpl(session);
-        BookingRepository bookingRepository = new HibernateBookingRepositoryImpl(session);
-        PriceRepository priceRepository = new HibernatePriceRepositoryImpl(session);
-
+    public static void workWithHibernate(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository,
+                                         BookingRepository bookingRepository, PriceRepository priceRepository) throws RepositoryException {
         System.out.println("All existing users: " + userRepository.selectAll());
         System.out.println("All existing roles: " + roleRepository.selectAll());
 
@@ -91,9 +83,5 @@ public class Runner {
         System.out.println("All bookings: " + bookingRepository.selectAll());
 
         System.out.println("All prices: " + priceRepository.selectAll());
-
-        System.out.println("=========CLOSE ALL UNUSED CONNECTIONS=============");
-        //jdbcConnectionPool.dispose();
-        System.out.println("=================SHUT DOWN APP====================");
     }
 }
