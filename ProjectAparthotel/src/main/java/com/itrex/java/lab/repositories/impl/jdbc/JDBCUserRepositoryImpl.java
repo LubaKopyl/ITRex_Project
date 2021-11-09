@@ -1,6 +1,6 @@
 package com.itrex.java.lab.repositories.impl.jdbc;
 
-import com.itrex.java.lab.dto.UserInfo;
+import com.itrex.java.lab.dto.UserInfoDTO;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.QueryConstants;
@@ -36,8 +36,8 @@ public class JDBCUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserInfo> getUsersInfo() {
-        List<UserInfo> userInfos = new ArrayList<>();
+    public List<UserInfoDTO> getUsersInfo() {
+        List<UserInfoDTO> userInfoDTOS = new ArrayList<>();
 
         try (Connection con = dataSource.getConnection();
              Statement stm = con.createStatement();
@@ -46,12 +46,12 @@ public class JDBCUserRepositoryImpl implements UserRepository {
                 String firstName = resultSet.getString(QueryConstants.FIRST_NAME_COLUMN);
                 String lastName = resultSet.getString(QueryConstants.LAST_NAME_COLUMN);
                 String roleName = resultSet.getString(QueryConstants.ROLE_NAME_COLUMN);
-                userInfos.add(new UserInfo(firstName, lastName, roleName));
+                userInfoDTOS.add(new UserInfoDTO(firstName, lastName, roleName));
             }
         } catch (SQLException ex) {
             throw new RepositoryException("Can't get users info." , ex);
         }
-        return userInfos;
+        return userInfoDTOS;
     }
 
     @Override

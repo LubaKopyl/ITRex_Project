@@ -1,13 +1,13 @@
 package com.itrex.java.lab.repositories;
 
-import com.itrex.java.lab.dto.UserInfo;
+import com.itrex.java.lab.dto.UserInfoDTO;
 import com.itrex.java.lab.entities.User;
 import java.util.List;
 
 public interface UserRepository {
     List<User> selectAll();
 
-    List<UserInfo> getUsersInfo();
+    List<UserInfoDTO> getUsersInfo();
 
     List<User> selectAllUsersByRole(String roleName);
 

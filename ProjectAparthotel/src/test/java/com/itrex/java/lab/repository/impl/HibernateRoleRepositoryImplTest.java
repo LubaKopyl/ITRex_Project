@@ -5,7 +5,6 @@ import com.itrex.java.lab.entities.Role;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.RoleRepository;
 import com.itrex.java.lab.repository.BaseRepositoryTest;
-import com.itrex.java.lab.service.FlywayService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,13 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HibernateRoleRepositoryImplTest extends BaseRepositoryTest {
 
     private final ApplicationContext applicationContext;
-    private final FlywayService flywayService;
     private final RoleRepository roleRepository;
 
     public HibernateRoleRepositoryImplTest() {
         super();
         applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-        flywayService = applicationContext.getBean(FlywayService.class);
         roleRepository = applicationContext.getBean(RoleRepository.class);
     }
 

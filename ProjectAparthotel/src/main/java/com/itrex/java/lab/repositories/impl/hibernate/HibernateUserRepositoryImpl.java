@@ -1,6 +1,6 @@
 package com.itrex.java.lab.repositories.impl.hibernate;
 
-import com.itrex.java.lab.dto.UserInfo;
+import com.itrex.java.lab.dto.UserInfoDTO;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.UserRepository;
@@ -30,7 +30,7 @@ public class HibernateUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserInfo> getUsersInfo() {
+    public List<UserInfoDTO> getUsersInfo() {
         return null;
     }
 

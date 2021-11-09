@@ -4,7 +4,6 @@ import com.itrex.java.lab.config.ApplicationContextConfiguration;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.*;
-import com.itrex.java.lab.service.FlywayService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -18,7 +17,6 @@ public class Runner {
         System.out.println("===================START APP======================");
         System.out.println("================START MIGRATION===================");
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-        applicationContext.getBean(FlywayService.class);
 
         UserRepository userRepository = applicationContext.getBean(UserRepository.class);
         RoleRepository roleRepository = applicationContext.getBean(RoleRepository.class);

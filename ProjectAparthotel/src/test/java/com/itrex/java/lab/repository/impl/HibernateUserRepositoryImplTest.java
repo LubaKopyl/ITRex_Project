@@ -5,7 +5,6 @@ import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.UserRepository;
 import com.itrex.java.lab.repository.BaseRepositoryTest;
-import com.itrex.java.lab.service.FlywayService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,13 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HibernateUserRepositoryImplTest extends BaseRepositoryTest {
 
     private final ApplicationContext applicationContext;
-    private final FlywayService flywayService;
     private final UserRepository userRepository;
 
     public HibernateUserRepositoryImplTest() {
         super();
         applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-        flywayService = applicationContext.getBean(FlywayService.class);
         userRepository = applicationContext.getBean(UserRepository.class);
     }
 

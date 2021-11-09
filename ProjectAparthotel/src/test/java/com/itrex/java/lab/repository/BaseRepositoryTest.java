@@ -1,6 +1,7 @@
 package com.itrex.java.lab.repository;
 
-import com.itrex.java.lab.service.FlywayService;
+import com.itrex.java.lab.config.ApplicationContextConfiguration;
+import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
@@ -8,21 +9,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public abstract class BaseRepositoryTest {
 
-    private final FlywayService flywayService;
+    private final Flyway flyway;
     private final ApplicationContext applicationContext;
 
     public BaseRepositoryTest () {
-        applicationContext = new AnnotationConfigApplicationContext();
-        flywayService = new FlywayService();
+        applicationContext = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
+        flyway = applicationContext.getBean(Flyway.class);
     }
 
     @BeforeEach
     public void initDB() {
-        flywayService.migrate();
+        flyway.migrate();
     }
 
     @AfterEach
     public void cleanDB() {
-        flywayService.clean();
+        flyway.clean();
     }
 }

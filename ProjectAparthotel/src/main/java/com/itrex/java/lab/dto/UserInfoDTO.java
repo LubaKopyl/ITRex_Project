@@ -1,15 +1,15 @@
 package com.itrex.java.lab.dto;
 
-public class UserInfo {
+public class UserInfoDTO {
 
     private String firstName;
     private String lastName;
     private String roleName;
 
-    public UserInfo() {
+    public UserInfoDTO() {
     }
 
-    public UserInfo(String firstName, String lastName, String roleName) {
+    public UserInfoDTO(String firstName, String lastName, String roleName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roleName = roleName;
