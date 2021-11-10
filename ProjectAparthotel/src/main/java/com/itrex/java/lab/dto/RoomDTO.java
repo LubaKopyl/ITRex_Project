@@ -10,6 +10,22 @@ public class RoomDTO {
     private Boolean hasHairDryer;
     private Boolean hasAirConditioning;
 
+    public RoomDTO() {
+
+    }
+
+    public RoomDTO(Integer roomId, Integer numberOfGuests, Integer numberOfBeds, Boolean hasKitchen,
+                   Boolean hasTV, Boolean hasWasher, Boolean hasHairDryer, Boolean hasAirConditioning) {
+        this.roomId = roomId;
+        this.numberOfGuests = numberOfGuests;
+        this.numberOfBeds = numberOfBeds;
+        this.hasKitchen = hasKitchen;
+        this.hasTV = hasTV;
+        this.hasWasher = hasWasher;
+        this.hasHairDryer = hasHairDryer;
+        this.hasAirConditioning = hasAirConditioning;
+    }
+
     public Integer getRoomId() {
         return roomId;
     }
@@ -72,5 +88,19 @@ public class RoomDTO {
 
     public void setHasAirConditioning(Boolean hasAirConditioning) {
         this.hasAirConditioning = hasAirConditioning;
+    }
+
+    @Override
+    public String toString() {
+        return "RoomDTO{" +
+                "roomId=" + roomId +
+                ", numberOfGuests=" + numberOfGuests +
+                ", numberOfBeds=" + numberOfBeds +
+                ", hasKitchen=" + hasKitchen +
+                ", hasTV=" + hasTV +
+                ", hasWasher=" + hasWasher +
+                ", hasHairDryer=" + hasHairDryer +
+                ", hasAirConditioning=" + hasAirConditioning +
+                '}';
     }
 }

@@ -11,6 +11,19 @@ public class BookingDTO {
     private Timestamp departureDate;
     private BigDecimal totalPrice;
 
+    public BookingDTO() {
+
+    }
+
+    public BookingDTO(Integer bookingId, RoomDTO room, UserDTO user, Timestamp arrivalDate, Timestamp departureDate, BigDecimal totalPrice) {
+        this.bookingId = bookingId;
+        this.room = room;
+        this.user = user;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
+        this.totalPrice = totalPrice;
+    }
+
     public Integer getBookingId() {
         return bookingId;
     }
@@ -57,5 +70,17 @@ public class BookingDTO {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "BookingDTO{" +
+                "bookingId=" + bookingId +
+                ", room=" + room +
+                ", user=" + user +
+                ", arrivalDate=" + arrivalDate +
+                ", departureDate=" + departureDate +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

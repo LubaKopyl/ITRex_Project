@@ -1,6 +1,7 @@
 package com.itrex.java.lab;
 
 import com.itrex.java.lab.config.ApplicationContextConfiguration;
+import com.itrex.java.lab.entities.Role;
 import com.itrex.java.lab.entities.User;
 import com.itrex.java.lab.exceptions.RepositoryException;
 import com.itrex.java.lab.repositories.*;

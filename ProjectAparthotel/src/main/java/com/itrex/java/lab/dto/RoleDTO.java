@@ -4,6 +4,15 @@ public class RoleDTO {
     private Integer roleId;
     private String roleName;
 
+    public RoleDTO() {
+
+    }
+
+    public RoleDTO(Integer roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }
@@ -18,5 +27,13 @@ public class RoleDTO {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "RoleDTO{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }
